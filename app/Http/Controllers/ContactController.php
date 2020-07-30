@@ -26,13 +26,13 @@ class ContactController extends Controller
     // }
 
 
-    public function storeFormContact(Request $request, $id = null)
-    {
-        $storeFormContact = $this->repo->storeFormContact($request,$id);
-        if(!$storeFormContact['status']){
-            return response()->json('Create or update error: ' . json_encode($storeFormContact['message']));
+    public function storeFormContact(Request $request, $id = null){
+        $storeFormContact = $this->repo->storeFormContact($request, $id);
+        // dd($storeFormContact);
+        if (!$storeFormContact['status']){
+            return redirect('/contact')->with('pesan', "Pesan anda gagal terkirim");
         }
-        return response()->json('Create or update success: ' . json_encode($storeFormContact['message']));
+        return redirect('/contact')->with('pesan', "Succes mengirim pesan");
     }
 
 

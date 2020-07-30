@@ -8,7 +8,11 @@
 </head>
 <body>
     <h1>Contact</h1>
-
+    @if(session()->has('pesan'))
+        <div class="alert alert-danger">
+          {{ session()->get('pesan') }}
+        </div>
+    @endif
     <form action="/contact/store" method="POST">
         {{ csrf_field() }}
         <input type="text" name="full_name" placeholder="nama">

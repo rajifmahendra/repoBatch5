@@ -71,34 +71,34 @@ class Repository{
         return Contact::where('id', $id)->firstOrFail();
     }
 
-    public function storeFormContact($request, $id){
-        $result = ['status' => false, 'message' => ''];
-        $validator = Validator::make($request->all(), 
+    public function storeFormContact($request, $id = null){
+        $result     = ['status' => false, 'message' => ''];
+        $validator  = Validator::make($request->all(),
             [
-                'full_name' => 'required|max:50',
-                'phone' => 'required|max:20',
-                'email' => 'required|email'
+                'full_name'    => 'required|max:50',
+                'phone'        => 'required|max:20',
+                'email'        => 'required|email'
             ]
         );
-        if($validator->fails()){
-            $result['message'] = $validator->errors()->all();
+        if ($validator->fails()) {
+            $result['message'] = $validator->errors()->first();
             return $result;
         }
-        $contact = new Contact();
-        if($id){
-            $contact = $this->findContactById($id);
+        $contact        = new Contact();
+        if ($id){
+            $contact    = $this->findContactById($id);
         }
-        $phoneService = $this->standardPhone($request->phone);
-        if(!$phoneService){
+        $phoneService   = $this->standardPhone($request->phone);
+        if (!$phoneService){
             $result['message'] = 'phone number is not valid';
             return $result;
         }
         $contact->full_name = $request->full_name;
-        $contact->email = $request->email;
-        $contact->phone = $request->phone;
-        $contact->save();        
-        $result['status'] = true;
-        $result['message'] = $contact;
+        $contact->email     = $request->email;
+        $contact->phone     = $request->phone;
+        $contact->save();
+        $result['status']   = true;
+        $result['message']  = $contact;
         return $result;
     }
     

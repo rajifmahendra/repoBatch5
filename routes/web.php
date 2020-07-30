@@ -20,7 +20,9 @@ Route::get('/', function () {
 
 Route::prefix('admin')->namespace('Admin')->group(function(){
     Route::resource('/home', 'HomeController');
+    Route::resource('/contact', 'ContactController');
 });
+
 
 Route::group(['prefix' => 'contact'], function(){
     Route::get('/{id?}', 'ContactController@indexFormContact');
