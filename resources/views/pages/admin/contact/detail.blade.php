@@ -46,7 +46,8 @@
                                     <div class="card-title">
                                         contact Detail
                                     </div>
-                                        <form action="" method="POST">
+                                        <form action="{{ route('contact.update', $contact->id) }}" method="POST">
+                                            @method('PATCH')
                                             @csrf
                                             <div class="input-group my-3">
                                                 <div class="input-group-prepend">
