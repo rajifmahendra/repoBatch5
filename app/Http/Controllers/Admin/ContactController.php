@@ -30,4 +30,6 @@ class ContactController extends Controller
         $this->repo->storeFormContact($request, $id);
         return redirect('/admin/contact/'.$id);
     }
+
+    
 }
